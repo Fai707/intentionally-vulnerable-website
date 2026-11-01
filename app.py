@@ -3,9 +3,17 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 @app.route("/xss")
-def index():
+def search():
     query = request.args.get("q")
     return render_template("xss.html", query=query)
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    username = request.form.get("username", "")
+    password = request.form.get("password", "")
+    print(username)
+    print(password)
+    return render_template("login.html")
 
 app.run()
 
